@@ -10,7 +10,7 @@ import java.util.Calendar;
  */
 public class DonationEntry {
 
-    // private static final int NUMBER_OF_FIELDS    = 21;
+    private static final int NUMBER_OF_FIELDS    = 21;
     
     // entry is not valid if this is not true
     private static final int ZIPCODE_LENGTH      = 5;
@@ -45,9 +45,8 @@ public class DonationEntry {
     public DonationEntry(String line) throws Exception
     {
         String[] fields = line.split("\\|", -1);
-        // assert fields.length == NUMBER_OF_FIELDS;
-        
-        is_valid = isValid(fields);
+        if (fields.length != NUMBER_OF_FIELDS) is_valid = false;
+        else                                   is_valid = isValid(fields);
     }
     
     
