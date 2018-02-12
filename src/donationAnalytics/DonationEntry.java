@@ -42,7 +42,7 @@ public class DonationEntry {
      * @param line donation entry
      * @throws Exception
      */
-    public DonationEntry(String line) throws Exception
+    public DonationEntry(String line)
     {
         String[] fields = line.split("\\|", -1);
         if (fields.length != NUMBER_OF_FIELDS) is_valid = false;
