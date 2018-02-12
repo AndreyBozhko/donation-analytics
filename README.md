@@ -29,4 +29,5 @@ The rest of them are concerning the validity of different entries:
 1. `CMTE_ID` is valid if not empty, and the 9-digit restriction is ignored (*as seems to be suggested in the competition description*);
 2. `ZIP_CODE` is valid if 0 <= zip_code <= 99999 and if the original string contains at least 5 characters;
 3. `TRANSACTION_AMT` is valid if it parses into a positive real number;
-4. `NAME` is valid if the last name and the first name are separated by ", " without any leading/trailing zeros, and each of them may consist of several words (*letters only*) separated by a whitespace.
+4. `NAME` is valid if the last name and the first name are separated by ", " without any leading/trailing zeros, and each of the names may consist of several words (*letters only*) separated by a whitespace;
+5. The total contribution amount must be rounded to the whole dollar, similar to how the percentile value is rounded.
