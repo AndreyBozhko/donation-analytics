@@ -37,8 +37,7 @@ public class Tuple<Key1 extends Comparable<Key1>,
         int cmp = this.key1.compareTo(that.key1);
         if (cmp != 0) return cmp;
         
-        cmp = this.key2.compareTo(that.key2);
-        return cmp;
+        return this.key2.compareTo(that.key2);
     }
     
     
