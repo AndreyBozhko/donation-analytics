@@ -126,6 +126,7 @@ public class Main {
                 
                 // output the statistics separated by '|' character
                 StringJoiner output_line = new StringJoiner("|");
+                
                 output_line.add(recipient).add(zipcode).add(year)
                            .add(Integer.toString(percentile_value))
                            .add(Integer.toString(cumulative))
