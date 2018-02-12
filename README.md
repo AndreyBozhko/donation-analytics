@@ -11,6 +11,22 @@ The algorithm successively reads data entries from the input file `itcont.txt` l
 The data structure used to store the donation information is implemented as several nested maps, `java.util.HashMap` in this case, so that the value/object stored is indexed by the sequence of three keys (`recipientID`, `zipcode` and `year`), and which can also be accessed in amortized **O(1)** time.
 In order to calculate the cumulative donation amount for a given set of keys (`recipientID`, `zipcode`, `year`), I store and update the running total sum as the map value.
 
-The other map stores instances of `RedBlackBST`, which stores the donation amounts in a sorted fashion.
+
+The other map stores instances of `RedBlackBST`, which stores the donation amounts in a sorted fashion and guarantees **O(log(N))** time for the *insert* operation.
 I used the open-source implementation of the red-black binary search tree that can be found at https://algs4.cs.princeton.edu/33balanced/RedBlackBST.java.html.
-This particular version of the red-black tree provides methods to find the *k*-th smallest key in the tree (which is basically the same as finding a percentile), with the **O(log(N))** time guarantee.
+
+This particular version of the red-black tree provides methods to find the *k*-th smallest key in the tree (which is exactly what you need to compute a percentile), with the **O(log(N))** time guarantee as well.
+
+Overall, getting the percentile and the transaction count (*simply the size of the red-black tree*) can be done at each iteration in logarithmic time.
+
+The repeat donors are identified by maintaining a set of all unique donors (given by their `NAME` and `ZIP_CODE`).
+
+
+## Assumptions
+As for the main algorithm body, I assumed that input will not be extremely large so that all the processed data may be stored in the RAM.
+The rest of them are concerning the validity of different entries:
+
+1. `CMTE_ID` is valid if not empty, and the 9-digit restriction is ignored (*as seems to be suggested in the competition description*);
+2. `ZIP_CODE` is valid if 0 <= zip_code <= 99999 and if the original string contains at least 5 characters;
+3. `TRANSACTION_AMT` is valid if it parses into a positive real number;
+4. `NAME` is valid if the last name and the first name are separated by ", " without any leading/trailing zeros, and each of them may consist of several words (*letters only*) separated by a whitespace.
