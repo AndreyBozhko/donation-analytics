@@ -75,7 +75,7 @@ public class DonationsDatabase {
         
         // percentile is computed using the nearest-rank method
         int percentile_rank = (int) Math.ceil(percentile * amounts.size() / 100.0);
-        return (int) Math.round(amounts.select(percentile_rank - 1).getKey());
+        return (int) Math.round(amounts.select(percentile_rank - 1).getKey1());
     }
     
     
