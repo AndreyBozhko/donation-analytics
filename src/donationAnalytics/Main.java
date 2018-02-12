@@ -47,7 +47,7 @@ public class Main {
         reader.close();
         
         int percentile = Integer.parseInt(line);
-        assert (percentile >= 1 && percentile <= 100);
+        if (percentile < 1 || percentile > 100) throw new Exception();
         
         return percentile;
     }
