@@ -115,9 +115,7 @@ public class DonationEntry {
      * @return true or false
      */
     public boolean isValid()
-    {
-        return is_valid;
-    }
+    { return is_valid; }
     
     
     
