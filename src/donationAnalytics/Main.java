@@ -101,11 +101,14 @@ public class Main {
             
             if (!entry.isValid())   continue;                   // if entry invalid, skip and read next line
             
+            // database.addDonation(entry);                        // add entry into database that allows to calculate statistics
+            
             
             // produce output if donor is repeat donor
-            if (database.ifRepeatDonor(new PairKey<>(entry.getDonorName(), entry.getZipcode())))
+            if (database.ifRepeatDonor(new PairKey<>(entry.getDonorName(), 
+                                                     entry.getZipcode()   ), entry.getDate()))
             {
-                database.addDonation(entry);                    // add entry into database that allows to calculate statistics
+                database.addDonation(entry);
                 
                 String recipient = entry.getRecipientID();      // 9-digit CMTE_ID
                 String zipcode = entry.getZipcode();            // 5-digit zip code
@@ -148,6 +151,7 @@ public class Main {
     public static void main(String[] args) throws Exception
     {
         Main solver = new Main(args[0], args[1], args[2]);
+        // Main solver = new Main("test_2\\input\\itcont.txt", "test_2\\input\\percentile.txt", "test_2\\output\\repeat_donors_java.txt");
         solver.performDonationAnalysis();
     }
 

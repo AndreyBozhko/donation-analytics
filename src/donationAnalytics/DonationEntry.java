@@ -1,6 +1,6 @@
 package donationAnalytics;
 
-import java.util.Calendar;
+import java.util.*;
 
 
 
@@ -30,6 +30,7 @@ public class DonationEntry {
     private String recipient, donor_name, zipcode;
     private double amount;
     private int year;
+    private Date date;
     
     private boolean is_valid = true;
     
@@ -98,6 +99,15 @@ public class DonationEntry {
      */
     public int getYear()
     { return year; }
+    
+    
+    
+    /**
+     * Returns date of donation
+     * @return date
+     */
+    public Date getDate()
+    { return new Date(date.getTime()) ; }
     
     
     
@@ -240,7 +250,7 @@ public class DonationEntry {
             Calendar calendar = Calendar.getInstance();
             calendar.setLenient(false);
             calendar.set(year, month - 1, day);
-            calendar.getTime();
+            date = calendar.getTime();
         }
         catch (Exception e) { return false; }
         return true;

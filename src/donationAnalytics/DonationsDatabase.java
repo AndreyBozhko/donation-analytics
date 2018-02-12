@@ -9,7 +9,7 @@ import java.util.*;
  */
 public class DonationsDatabase {
 
-    private final Set<PairKey<String,String>> donors;                   // set of all unique donors
+    private final Map<PairKey<String,String>, Date> donors;                   // set of all unique donors
 
     // data structures that contain all the donations from repeat donors and cumulative donations, respectively
     // data is indexed by the combination of keys: recipient ID -> zip code -> year
@@ -23,7 +23,7 @@ public class DonationsDatabase {
      */
     public DonationsDatabase()
     {
-        donors           = new TreeSet<>();
+        donors           = new TreeMap<>();
         fromRepeatDonors = new MapOfMaps<>();
         cumulative       = new MapOfMaps<>();
     }
@@ -110,13 +110,21 @@ public class DonationsDatabase {
     
     
     /**
-     * Attempts to add new donor into the set. If the donor is already present in the set,
-     * then it is a repeat donor, otherwise the donor is added.
+     * Attempts to add new donor into the map. If the donor is already present in the map with earlier date,
+     * then it is a repeat donor, if with later date - then the donor is discarded; otherwise the donor is added.
      * @param donor donor name and zip code to uniquely identify a donor
      * @return {@code true} if the donor is repeat donor, {@code false} if the donor is new
      */
-    public boolean ifRepeatDonor(PairKey<String, String> donor)
-    { return (!donors.add(donor)); }
+    public boolean ifRepeatDonor(PairKey<String, String> donor, Date date)
+    { 
+        if (donors.containsKey(donor))
+        {
+            Date previousdate = donors.get(donor);
+            return (previousdate.compareTo(date) <= 0);
+        }
+        donors.put(donor, date);
+        return false;
+    }
     
     
 }

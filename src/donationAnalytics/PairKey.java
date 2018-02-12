@@ -59,4 +59,20 @@ public class PairKey<Key1 extends Comparable<Key1>,
     public Key2 getAuxiliaryKey()
     { return key2; }
     
+    
+    
+    /**
+     * Overrides {@code equals} method
+     */
+    @Override
+    public boolean equals(Object o)
+    {
+        if (!(o instanceof PairKey<?, ?>)) return false;
+        PairKey<?, ?> that = (PairKey<?, ?>) o;
+        
+        if (!(that.key1 instanceof String)) return false;
+        if (!(that.key2 instanceof String)) return false;
+        
+        return (this.key1.equals(that.key1) && this.key2.equals(that.key2));
+    }
 }
