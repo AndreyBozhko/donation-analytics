@@ -13,8 +13,8 @@ public class DonationsDatabase {
 
     // data structures that contain all the donations from repeat donors and cumulative donations, respectively
     // data is indexed by the combination of keys: recipient ID -> zip code -> year
-    private final MapOfMaps<OrderedTree> fromRepeatDonors;
-    private final MapOfMaps<Double>      cumulative;
+    private final MapOfMaps<OrderedTree<Double>> fromRepeatDonors;
+    private final MapOfMaps<Double>              cumulative;
     
     
     
@@ -46,9 +46,9 @@ public class DonationsDatabase {
         
         // insert amount in the OrderedTree
         // growing tree.size() serves as auxiliary key preventing collisions of equal primary keys
-        fromRepeatDonors.putIfAbsent(recipient, zipcode, year, new OrderedTree());
-        OrderedTree tree = fromRepeatDonors.get(recipient, zipcode, year); 
-        tree.put(new Tuple<>(amount, tree.size()));
+        fromRepeatDonors.putIfAbsent(recipient, zipcode, year, new OrderedTree<>());
+        OrderedTree<Double> tree = fromRepeatDonors.get(recipient, zipcode, year); 
+        tree.put(amount);
         
         
         // update cumulative
@@ -71,11 +71,11 @@ public class DonationsDatabase {
      */
     public int findPercentile(String recipient, String zipcode, String year, int percentile)
     {
-        OrderedTree amounts = fromRepeatDonors.get(recipient, zipcode, year);
+        OrderedTree<Double> amounts = fromRepeatDonors.get(recipient, zipcode, year);
         
         // percentile is computed using the nearest-rank method
         int percentile_rank = (int) Math.ceil(percentile * amounts.size() / 100.0);
-        return (int) Math.round(amounts.select(percentile_rank - 1).getKey1());
+        return (int) Math.round(amounts.selectKMin(percentile_rank - 1));
     }
     
     
