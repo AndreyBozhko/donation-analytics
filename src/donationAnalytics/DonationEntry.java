@@ -250,6 +250,7 @@ public class DonationEntry {
             date = Calendar.getInstance();
             date.setLenient(false);
             date.set(yyyy, mm - 1, dd);
+            date.getTime();                 // throws exception if day or month values are out of their appropriate range
         }
         catch (Exception e) { return false; }
         return true;
