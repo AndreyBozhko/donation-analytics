@@ -31,3 +31,7 @@ The rest of them are concerning the validity of different entries:
 3. `TRANSACTION_AMT` is valid if it parses into a positive real number;
 4. `NAME` is valid if the last name and the first name are separated by ", " without any leading/trailing zeros, and each of the names may consist of several words (*letters only*) separated by a whitespace;
 5. The total contribution amount must be rounded to the whole dollar, similar to how the percentile value is rounded.
+
+
+## Project dependencies
+My implementation only imports classes from standard Java packages such as `java.util` or `java.io`. The methods from the `RedBlackBST` class that require additional imports are commented out as they are not essential for the solution.
