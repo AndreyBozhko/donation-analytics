@@ -99,20 +99,18 @@ public class Main {
             
             DonationEntry entry = new DonationEntry(line);      // process new entry from the line
             
-            if (!entry.isValid())   continue;                   // if entry invalid, skip and read next line
-            
-            // database.addDonation(entry);                        // add entry into database that allows to calculate statistics
+            if (!entry.isValid()) continue;                   // if entry invalid, skip and read next line
             
             
             // produce output if donor is repeat donor
             if (database.ifRepeatDonor(new Tuple<>(entry.getDonorName(), 
                                                      entry.getZipcode()   ), entry.getDate()))
             {
-                database.addDonation(entry);
+                database.addDonation(entry);                    // add entry into database that allows to calculate statistics
                 
                 String recipient = entry.getRecipientID();      // 9-digit CMTE_ID
-                String zipcode = entry.getZipcode();            // 5-digit zip code
-                String year = entry.getYear();                 // 4-digit year
+                String zipcode   = entry.getZipcode();          // 5-digit zip code
+                String year      = entry.getYear();             // 4-digit year
                 
                 // calculate required percentile for given (recipient, zip code, year)
                 Integer percentile_value = database.findPercentile(recipient, zipcode, year, percentile);
