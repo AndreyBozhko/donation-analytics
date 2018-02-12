@@ -3,13 +3,13 @@ package donationAnalytics;
 
 
 /**
- * Data type that consists of a pair of keys - primary and auxiliary
- * @param <Key1> primary key
- * @param <Key2> auxiliary key
+ * Data type that consists of a pair of keys
+ * @param <Key1> first key
+ * @param <Key2> second key
  */
 public class Tuple<Key1 extends Comparable<Key1>, 
-		           Key2 extends Comparable<Key2>> 
-			  implements Comparable<Tuple<Key1, Key2>>{
+		   Key2 extends Comparable<Key2>> 
+		        implements Comparable<Tuple<Key1, Key2>>{
 
     private final Key1 key1;
     private final Key2 key2;
@@ -17,8 +17,8 @@ public class Tuple<Key1 extends Comparable<Key1>,
     
     /**
      * Initializes a key pair
-     * @param key1 - first (primary) key
-     * @param key2 - second (auxiliary) key
+     * @param key1 - first key
+     * @param key2 - second key
      */
     public Tuple(Key1 key1, Key2 key2)
     {
@@ -29,8 +29,7 @@ public class Tuple<Key1 extends Comparable<Key1>,
     
     /**
      * Implementation of Comparable Interface for a pair of keys.
-     * Primary key {@code key1} is compared first.
-     * Auxiliary key {@code key2} is compared second.
+     * First, the key {@code key1} is compared, then the key {@code key2} is compared.
      */
     public int compareTo(Tuple<Key1, Key2> that)
     {
@@ -42,18 +41,18 @@ public class Tuple<Key1 extends Comparable<Key1>,
     
     
     /**
-     * Returns primary key
-     * @return primary key {@code key1}
+     * Returns first key
+     * @return key {@code key1}
      */
-    public Key1 getKey()
+    public Key1 getKey1()
     { return key1; }
     
     
     /**
-     * Returns auxiliary key
-     * @return auxiliary key {@code key2}
+     * Returns second key
+     * @return key {@code key2}
      */
-    public Key2 getAuxiliaryKey()
+    public Key2 getKey2()
     { return key2; }
     
     
