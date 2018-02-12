@@ -9,7 +9,7 @@ package donationAnalytics;
  */
 public class Tuple<Key1 extends Comparable<Key1>, 
 		   Key2 extends Comparable<Key2>> 
-		     implements Comparable<Tuple<Key1, Key2>>{
+		     implements Comparable<Tuple<Key1, Key2>> {
 
     private final Key1 key1;
     private final Key2 key2;
