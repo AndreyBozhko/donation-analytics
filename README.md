@@ -5,6 +5,9 @@ My solution to the Insight Data Engineering Coding Competition (https://github.c
 The solution is written in Java and the source files are compiled using the `javac` compiler from the package `openjdk-9-jdk-headless`.
 The script `run.sh` compiles and executes the project; the two input data files are `input/itcont.txt` and `input/percentile.txt`, and the result is written into `output/repeat_donors.txt`. Running `insight_testsuite/run_tests.sh` evaluates the solution using the tests from `insight_testsuite/tests/`.
 
+***Note: to execute `run_tests.sh`, change you current_working_directory to `insight_testsuite/` first, and then call `./run_tests.sh`.***
+***Somewhy the script wouldn't work when I tried to launch it from any other directory.***
+
 ## Algorithm overview
 The algorithm successively reads data entries from the input file `itcont.txt` line by line, parsing each line after it is read, adding the new data to the data structures that allow efficient computation of the required statistics, and generating the corresponding output line. The memory requirement of the algorithm is **O(N)**. In the worst case **N** is the total number of entries scanned so far, and all of them will need to be stored to guarantee precise calculation of the *n*-th percentile.
 
@@ -34,4 +37,4 @@ The rest of them are concerning the validity of different entries:
 
 
 ## Project dependencies
-My implementation only imports classes from standard Java packages such as `java.util` or `java.io`. The methods from the `RedBlackBST` class that require additional imports are commented out as they are not essential for the solution.
+My implementation only imports classes from standard Java packages such as `java.util` and `java.io`. The methods from the `RedBlackBST` class that require additional imports are commented out as they are not essential for the solution.
