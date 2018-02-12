@@ -39,7 +39,7 @@ public class DonationsDatabase {
     {
         String recipient = entry.getRecipientID();          // key 1 - recipient ID
         String zipcode   = entry.getZipcode();              // key 2 - zip code 
-        String year     = entry.getYear();                 // key 3 - year
+        String year      = entry.getYear();                 // key 3 - year
 
         Double amount = entry.getAmount();                  // donation amount to add to collection of past donations and to update cumulative  
         
