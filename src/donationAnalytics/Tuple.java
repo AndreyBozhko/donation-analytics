@@ -33,10 +33,10 @@ public class Tuple<Key1 extends Comparable<Key1>,
      */
     public int compareTo(Tuple<Key1, Key2> that)
     {
-        int cmp = this.key1.compareTo(that.key1);
+        int cmp = (this.key1).compareTo(that.key1);
         if (cmp != 0) return cmp;
         
-        return this.key2.compareTo(that.key2);
+        return (this.key2).compareTo(that.key2);
     }
     
     
@@ -69,6 +69,6 @@ public class Tuple<Key1 extends Comparable<Key1>,
         if (!(that.key1 instanceof String)) return false;
         if (!(that.key2 instanceof String)) return false;
         
-        return (this.key1.equals(that.key1) && this.key2.equals(that.key2));
+        return ((this.key1).equals(that.key1) && (this.key2).equals(that.key2));
     }
 }
