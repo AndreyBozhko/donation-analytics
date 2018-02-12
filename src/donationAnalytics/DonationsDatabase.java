@@ -9,7 +9,7 @@ import java.util.*;
  */
 public class DonationsDatabase {
 
-    private final Map<Tuple<String,String>, Date> donors;                   // set of all unique donors
+    private final Map<Tuple<String,String>, Calendar> donors;                   // set of all unique donors
 
     // data structures that contain all the donations from repeat donors and cumulative donations, respectively
     // data is indexed by the combination of keys: recipient ID -> zip code -> year
@@ -39,7 +39,7 @@ public class DonationsDatabase {
     {
         String recipient = entry.getRecipientID();          // key 1 - recipient ID
         String zipcode   = entry.getZipcode();              // key 2 - zip code 
-        String year      = entry.getYear();                 // key 3 - year
+        String year     = entry.getYear();                 // key 3 - year
 
         Double amount = entry.getAmount();                  // donation amount to add to collection of past donations and to update cumulative  
         
@@ -110,19 +110,26 @@ public class DonationsDatabase {
     
     
     /**
-     * Attempts to add new donor into the map. If the donor is already present in the map with earlier date,
-     * then it is a repeat donor, if with later date - then the donor is discarded; otherwise the donor is added.
+     * Attempts to add new donor into the map. If the donor is already present in the map with same or earlier year,
+     * then it is a repeat donor, if with later date - then it's not a repeat donor, but the donation date is updated;
+     * otherwise the donor is added.
      * @param donor donor name and zip code to uniquely identify a donor
      * @return {@code true} if the donor is repeat donor, {@code false} if the donor is new
      */
-    public boolean ifRepeatDonor(Tuple<String, String> donor, Date date)
+    public boolean ifRepeatDonor(Tuple<String, String> donor, Calendar laterdate)
     { 
         if (donors.containsKey(donor))
         {
-            Date previousdate = donors.get(donor);
-            return (previousdate.compareTo(date) <= 0);
+            Calendar previousdate = donors.get(donor);
+            
+            // if new entry has same or later year, then it is a repeat donor 
+            if (previousdate.get(Calendar.YEAR) <= laterdate.get(Calendar.YEAR)) { return true; }
+            
+            // otherwise it is not a repeat donor, and the entry date is updated
+            donors.remove(donor);
         }
-        donors.put(donor, date);
+        
+        donors.put(donor, laterdate);
         return false;
     }
     

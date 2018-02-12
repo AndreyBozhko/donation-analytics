@@ -29,7 +29,7 @@ public class DonationEntry {
     
     private String recipient, donor_name, zipcode, year;
     private double amount;
-    private Date date;
+    private Calendar date;
     
     private boolean is_valid = true;
     
@@ -105,8 +105,8 @@ public class DonationEntry {
      * Returns date of donation
      * @return date
      */
-    public Date getDate()
-    { return new Date(date.getTime()); }
+    public Calendar getDate()
+    { return (Calendar) date.clone(); }
     
     
     
@@ -115,7 +115,9 @@ public class DonationEntry {
      * @return true or false
      */
     public boolean isValid()
-    { return is_valid; }
+    {
+        return is_valid;
+    }
     
     
     
@@ -245,10 +247,9 @@ public class DonationEntry {
             int dd    = Integer.parseInt(datestring.substring(2, 4));
             
                         
-            Calendar calendar = Calendar.getInstance();
-            calendar.setLenient(false);
-            calendar.set(yyyy, mm - 1, dd);
-            date = calendar.getTime();
+            date = Calendar.getInstance();
+            date.setLenient(false);
+            date.set(yyyy, mm - 1, dd);
         }
         catch (Exception e) { return false; }
         return true;
