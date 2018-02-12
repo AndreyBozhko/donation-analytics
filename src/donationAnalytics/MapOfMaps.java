@@ -84,8 +84,8 @@ public class MapOfMaps<T> {
         boolean flag = true;
         
         flag = map.containsKey(key1);
-        if (flag) flag = map.get(key1).containsKey(key2));
-        if (flag) flag = map.get(key1).get(key2).containsKey(key3));
+        if (flag) flag = map.get(key1).containsKey(key2);
+        if (flag) flag = map.get(key1).get(key2).containsKey(key3);
         
         return flag;
     }
