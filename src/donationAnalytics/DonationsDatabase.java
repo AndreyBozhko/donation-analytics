@@ -9,7 +9,7 @@ import java.util.*;
  */
 public class DonationsDatabase {
 
-    private final Map<Tuple<String,String>, Calendar> donors;                   // set of all unique donors
+    private final Map<Tuple<String, String>, Calendar> donors;                   // set of all unique donors
 
     // data structures that contain all the donations from repeat donors and cumulative donations, respectively
     // data is indexed by the combination of keys: recipient ID -> zip code -> year
@@ -39,7 +39,7 @@ public class DonationsDatabase {
     {
         String recipient = entry.getRecipientID();          // key 1 - recipient ID
         String zipcode   = entry.getZipcode();              // key 2 - zip code 
-        String year     = entry.getYear();                 // key 3 - year
+        String year      = entry.getYear();                 // key 3 - year
 
         Double amount = entry.getAmount();                  // donation amount to add to collection of past donations and to update cumulative  
         
