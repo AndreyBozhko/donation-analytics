@@ -101,12 +101,12 @@ public class Main {
             
             if (!entry.isValid())   continue;                   // if entry invalid, skip and read next line
             
-            database.addDonation(entry);                        // add entry into database that allows to calculate statistics
-            
             
             // produce output if donor is repeat donor
             if (database.ifRepeatDonor(new PairKey<>(entry.getDonorName(), entry.getZipcode())))
             {
+                database.addDonation(entry);                    // add entry into database that allows to calculate statistics
+                
                 String recipient = entry.getRecipientID();      // 9-digit CMTE_ID
                 String zipcode = entry.getZipcode();            // 5-digit zip code
                 Integer year = entry.getYear();                 // 4-digit year
