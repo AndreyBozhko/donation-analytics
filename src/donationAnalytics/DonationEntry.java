@@ -40,7 +40,6 @@ public class DonationEntry {
      * recipient ID, donor name, donor zip code, donation amount, donation date.
      * Checks whether the donor is an individual and if the entry is valid 
      * @param line donation entry
-     * @throws Exception
      */
     public DonationEntry(String line)
     {
@@ -115,9 +114,7 @@ public class DonationEntry {
      * @return true or false
      */
     public boolean isValid()
-    {
-        return is_valid;
-    }
+    { return is_valid; }
     
     
     
