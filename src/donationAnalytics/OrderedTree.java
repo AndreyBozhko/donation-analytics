@@ -15,7 +15,7 @@ public class OrderedTree extends RedBlackBST<Tuple<Double, Integer>, Integer> {
     /**
      * Inserts the key-value pair into the OrderedTree.
      * The value inserted is 0.
-     * @param key a PairKey data type
+     * @param key a Tuple data type
      */
     public void put(Tuple<Double, Integer> key)
     { super.put(key, 0); }
