@@ -27,9 +27,8 @@ public class DonationEntry {
     private static final int OTHER_ID_POSITION   = 15;
     
     
-    private String recipient, donor_name, zipcode;
+    private String recipient, donor_name, zipcode, year;
     private double amount;
-    private int year;
     private Date date;
     
     private boolean is_valid = true;
@@ -97,7 +96,7 @@ public class DonationEntry {
      * Returns year in which the donation was made
      * @return donation year
      */
-    public int getYear()
+    public String getYear()
     { return year; }
     
     
@@ -107,7 +106,7 @@ public class DonationEntry {
      * @return date
      */
     public Date getDate()
-    { return new Date(date.getTime()) ; }
+    { return new Date(date.getTime()); }
     
     
     
@@ -242,14 +241,15 @@ public class DonationEntry {
         {
             if (datestring.length() != 8) throw new Exception();
                         
-            year      = Integer.parseInt(datestring.substring(4, 8));
-            int month = Integer.parseInt(datestring.substring(0, 2));
-            int day   = Integer.parseInt(datestring.substring(2, 4));
+            year      = datestring.substring(4, 8);
+            int yyyy  = Integer.parseInt(year);
+            int mm    = Integer.parseInt(datestring.substring(0, 2));
+            int dd    = Integer.parseInt(datestring.substring(2, 4));
             
                         
             Calendar calendar = Calendar.getInstance();
             calendar.setLenient(false);
-            calendar.set(year, month - 1, day);
+            calendar.set(yyyy, mm - 1, dd);
             date = calendar.getTime();
         }
         catch (Exception e) { return false; }

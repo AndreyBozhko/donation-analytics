@@ -10,7 +10,7 @@ package donationAnalytics;
  */
 public class OrderedTree {
     
-    private final RedBlackBST<PairKey<Double, Integer>, Integer> tree;
+    private final RedBlackBST<Tuple<Double, Integer>, Integer> tree;
     
     
     
@@ -29,7 +29,7 @@ public class OrderedTree {
      * The value inserted is 0.
      * @param key a PairKey data type
      */
-    public void put(PairKey<Double, Integer> key)
+    public void put(Tuple<Double, Integer> key)
     { tree.put(key, 0); }
     
     
@@ -39,7 +39,7 @@ public class OrderedTree {
      * @param key a PairKey data type
      * @return value
      */
-    public int get(PairKey<Double, Integer> key)
+    public int get(Tuple<Double, Integer> key)
     { return tree.get(key); }
     
     
@@ -50,7 +50,7 @@ public class OrderedTree {
      * @param k index of the key
      * @return key
      */
-    public PairKey<Double, Integer> select(int k)
+    public Tuple<Double, Integer> select(int k)
     { return tree.select(k); }
     
     

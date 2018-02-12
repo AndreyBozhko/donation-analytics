@@ -1,6 +1,7 @@
 package donationAnalytics;
 
 import java.io.*;
+import java.util.*;
 
 
 
@@ -28,7 +29,6 @@ public class Main {
         this.output_path = output_path;
         
         percentile = readPercentile(perc_path);
-        
         database = new DonationsDatabase();
     }
     
@@ -105,14 +105,14 @@ public class Main {
             
             
             // produce output if donor is repeat donor
-            if (database.ifRepeatDonor(new PairKey<>(entry.getDonorName(), 
+            if (database.ifRepeatDonor(new Tuple<>(entry.getDonorName(), 
                                                      entry.getZipcode()   ), entry.getDate()))
             {
                 database.addDonation(entry);
                 
                 String recipient = entry.getRecipientID();      // 9-digit CMTE_ID
                 String zipcode = entry.getZipcode();            // 5-digit zip code
-                Integer year = entry.getYear();                 // 4-digit year
+                String year = entry.getYear();                 // 4-digit year
                 
                 // calculate required percentile for given (recipient, zip code, year)
                 Integer percentile_value = database.findPercentile(recipient, zipcode, year, percentile);
@@ -125,14 +125,14 @@ public class Main {
                 
                 
                 // output the statistics separated by '|' character
-                String output_line = recipient + "|" 
-                                   + zipcode + "|"
-                                   + Integer.toString(year) + "|"
-                                   + Integer.toString(percentile_value) + "|"
-                                   + Integer.toString(cumulative) + "|"
-                                   + Integer.toString(transaction_count) + System.lineSeparator();
+                StringJoiner output_line = new StringJoiner("|");
+                output_line.add(recipient).add(zipcode).add(year)
+                           .add(Integer.toString(percentile_value))
+                           .add(Integer.toString(cumulative))
+                           .add(Integer.toString(transaction_count));
                 
-                writer.write(output_line);
+                writer.write(output_line.toString());
+                writer.newLine();
             }
         }
         
@@ -151,6 +151,9 @@ public class Main {
     public static void main(String[] args) throws Exception
     {
         Main solver = new Main(args[0], args[1], args[2]);
+//        Main solver = new Main("tests\\test_32\\input\\itcont.txt", 
+//                               "tests\\test_32\\input\\percentile.txt", 
+//                               "tests\\test_32\\output\\repeat_donors_32.txt");
         solver.performDonationAnalysis();
     }
 

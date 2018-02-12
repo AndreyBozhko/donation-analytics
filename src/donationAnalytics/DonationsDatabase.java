@@ -9,7 +9,7 @@ import java.util.*;
  */
 public class DonationsDatabase {
 
-    private final Map<PairKey<String,String>, Date> donors;                   // collection of all unique donors
+    private final Map<Tuple<String,String>, Date> donors;                   // set of all unique donors
 
     // data structures that contain all the donations from repeat donors and cumulative donations, respectively
     // data is indexed by the combination of keys: recipient ID -> zip code -> year
@@ -39,7 +39,7 @@ public class DonationsDatabase {
     {
         String recipient = entry.getRecipientID();          // key 1 - recipient ID
         String zipcode   = entry.getZipcode();              // key 2 - zip code 
-        Integer year     = entry.getYear();                 // key 3 - year
+        String year     = entry.getYear();                 // key 3 - year
 
         Double amount = entry.getAmount();                  // donation amount to add to collection of past donations and to update cumulative  
         
@@ -48,7 +48,7 @@ public class DonationsDatabase {
         // growing tree.size() serves as auxiliary key preventing collisions of equal primary keys
         fromRepeatDonors.putIfAbsent(recipient, zipcode, year, new OrderedTree());
         OrderedTree tree = fromRepeatDonors.get(recipient, zipcode, year); 
-        tree.put(new PairKey<>(amount, tree.size()));
+        tree.put(new Tuple<>(amount, tree.size()));
         
         
         // update cumulative
@@ -69,7 +69,7 @@ public class DonationsDatabase {
      * @param percentile key percentile to search for
      * @return value corresponding to the percentile
      */
-    public int findPercentile(String recipient, String zipcode, int year, int percentile)
+    public int findPercentile(String recipient, String zipcode, String year, int percentile)
     {
         OrderedTree amounts = fromRepeatDonors.get(recipient, zipcode, year);
         
@@ -88,7 +88,7 @@ public class DonationsDatabase {
      * @param year key 3 year
      * @return cumulative donation
      */
-    public int findCumulative(String recipient, String zipcode, int year)
+    public int findCumulative(String recipient, String zipcode, String year)
     {
         Double total = cumulative.get(recipient, zipcode, year);
         return (int) Math.round(total);
@@ -102,7 +102,7 @@ public class DonationsDatabase {
      * @param year key 3 year
      * @return transaction count
      */
-    public int findTransactionCount(String recipient, String zipcode, int year)
+    public int findTransactionCount(String recipient, String zipcode, String year)
     {
         return fromRepeatDonors.get(recipient, zipcode, year).size();
     }
@@ -115,7 +115,7 @@ public class DonationsDatabase {
      * @param donor donor name and zip code to uniquely identify a donor
      * @return {@code true} if the donor is repeat donor, {@code false} if the donor is new
      */
-    public boolean ifRepeatDonor(PairKey<String, String> donor, Date date)
+    public boolean ifRepeatDonor(Tuple<String, String> donor, Date date)
     { 
         if (donors.containsKey(donor))
         {
