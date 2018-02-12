@@ -9,7 +9,7 @@ import java.util.*;
  */
 public class DonationsDatabase {
 
-    private final Map<PairKey<String,String>, Date> donors;                   // set of all unique donors
+    private final Map<PairKey<String,String>, Date> donors;                   // collection of all unique donors
 
     // data structures that contain all the donations from repeat donors and cumulative donations, respectively
     // data is indexed by the combination of keys: recipient ID -> zip code -> year
