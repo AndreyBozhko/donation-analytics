@@ -151,7 +151,6 @@ public class Main {
     public static void main(String[] args) throws Exception
     {
         Main solver = new Main(args[0], args[1], args[2]);
-        // Main solver = new Main("test_2\\input\\itcont.txt", "test_2\\input\\percentile.txt", "test_2\\output\\repeat_donors_java.txt");
         solver.performDonationAnalysis();
     }
 
