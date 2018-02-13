@@ -29,6 +29,6 @@ public class OrderedTree<Key extends Comparable<Key>>
      * @return the kth smallest key
      */
     public Key selectKMin(int k)
-    { return (super.select(k)).getKey1(); }
+    { return select(k).getKey1(); }
     
 }
