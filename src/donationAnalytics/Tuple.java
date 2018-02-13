@@ -66,9 +66,6 @@ public class Tuple<Key1 extends Comparable<Key1>,
         if (!(o instanceof Tuple<?, ?>)) return false;
         Tuple<?, ?> that = (Tuple<?, ?>) o;
         
-        if (!(that.key1 instanceof String)) return false;
-        if (!(that.key2 instanceof String)) return false;
-        
         return ((this.key1).equals(that.key1) && (this.key2).equals(that.key2));
     }
 }
