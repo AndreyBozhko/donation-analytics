@@ -63,6 +63,8 @@ public class Tuple<Key1 extends Comparable<Key1>,
     @Override
     public boolean equals(Object o)
     {
+        if (this == o) return true;
+
         if (!(o instanceof Tuple<?, ?>)) return false;
         Tuple<?, ?> that = (Tuple<?, ?>) o;
         
