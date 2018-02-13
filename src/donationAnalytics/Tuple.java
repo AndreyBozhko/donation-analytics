@@ -3,7 +3,7 @@ package donationAnalytics;
 
 
 /**
- * Data type that consists of a pair of keys - primary and auxiliary
+ * Data type that consists of a pair of keys
  * @param <Key1> first key
  * @param <Key2> second key
  */
