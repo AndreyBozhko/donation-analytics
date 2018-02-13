@@ -1,8 +1,9 @@
 #!/bin/bash
 
-DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+DIR=$(dirname ${BASH_SOURCE})
 
 classpath=$DIR:$DIR/src:$DIR/src/donationAnalytics
+
 input1=$DIR/input/itcont.txt
 input2=$DIR/input/percentile.txt
 output=$DIR/output/repeat_donors.txt
