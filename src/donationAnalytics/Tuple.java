@@ -15,6 +15,7 @@ public class Tuple<Key1 extends Comparable<Key1>,
     private final Key2 key2;
     
     
+    
     /**
      * Initializes a key pair
      * @param key1 - first key
@@ -25,6 +26,7 @@ public class Tuple<Key1 extends Comparable<Key1>,
         this.key1 = key1;
         this.key2 = key2;
     }
+    
     
     
     /**
@@ -40,12 +42,14 @@ public class Tuple<Key1 extends Comparable<Key1>,
     }
     
     
+    
     /**
      * Returns first key
      * @return key {@code key1}
      */
     public Key1 getKey1()
     { return key1; }
+    
     
     
     /**
