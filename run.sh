@@ -2,7 +2,7 @@
 
 DIR=$(dirname ${BASH_SOURCE})
 
-classpath=$DIR:$DIR/bin:$DIR/bin/donationAnalytics
+classpath=$DIR/bin
 
 input1=$DIR/input/itcont.txt
 input2=$DIR/input/percentile.txt
