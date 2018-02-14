@@ -93,6 +93,8 @@ public class DonationsDatabase {
         return (int) Math.round(total);
     }
     
+    
+    
     /**
      * Returns the total transaction count.
      * Constant time performance due to O(1) lookup time in HashMaps and O(1) lookup time of RedBlackBST.size()
