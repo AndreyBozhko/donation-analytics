@@ -45,7 +45,6 @@ public class DonationsDatabase {
         
         
         // insert amount in the OrderedTree
-        // growing tree.size() serves as auxiliary key preventing collisions of equal primary keys
         fromRepeatDonors.putIfAbsent(recipient, zipcode, year, new OrderedTree<>());
         OrderedTree<Double> tree = fromRepeatDonors.get(recipient, zipcode, year); 
         tree.put(amount);
