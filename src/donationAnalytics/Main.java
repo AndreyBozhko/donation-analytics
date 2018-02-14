@@ -103,8 +103,7 @@ public class Main {
             
             
             // produce output if donor is repeat donor
-            if (database.ifRepeatDonor(new Tuple<>(entry.getDonorName(), 
-                                                     entry.getZipcode()   ), entry.getDate()))
+            if (database.ifRepeatDonor(entry.getDonorName(), entry.getZipcode(), entry.getDate()))
             {
                 database.addDonation(entry);                    // add entry into database that allows to calculate statistics
                 
