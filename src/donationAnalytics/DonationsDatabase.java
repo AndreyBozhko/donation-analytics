@@ -116,8 +116,10 @@ public class DonationsDatabase {
      * @param donor donor name and zip code to uniquely identify a donor
      * @return {@code true} if the donor is repeat donor, {@code false} if the donor is new
      */
-    public boolean ifRepeatDonor(Tuple<String, String> donor, Calendar laterdate)
+    public boolean ifRepeatDonor(String donorname, String donorzipcode, Calendar laterdate)
     { 
+        Tuple<String, String> donor = new Tuple<>(donorname, donorzipcode);
+        
         if (donors.containsKey(donor))
         {
             Calendar previousdate = donors.get(donor);
