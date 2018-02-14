@@ -40,13 +40,11 @@ public class MapOfMaps<T> {
     public void put(String key1, String key2, String key3, T t)
     {
         Map<String, Map<String, Map<String, T>>> map0 = map;
-        if (!map0.containsKey(key1))
-            map0.put(key1, new HashMap<>());            // initialize empty HashMap on the 1st level if necessary 
+        map0.putIfAbsent(key1, new HashMap<>());            // initialize empty HashMap on the 1st level if necessary 
         
         
         Map<String, Map<String, T>> map1 = map0.get(key1);
-        if (!map1.containsKey(key2))
-            map1.put(key2, new HashMap<>());            // initialize empty HashMap on the 2nd level if necessary
+        map1.putIfAbsent(key2, new HashMap<>());            // initialize empty HashMap on the 2nd level if necessary
         
         
         Map<String, T> map2 = map1.get(key2);
