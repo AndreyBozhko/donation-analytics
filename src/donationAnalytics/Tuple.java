@@ -58,7 +58,8 @@ public class Tuple<Key1 extends Comparable<Key1>,
     
     
     /**
-     * Overrides {@code equals} method
+     * Overrides Object's {@code equals} method.
+     * Two Tuple object are equal if both their keys are respectively equal.
      */
     @Override
     public boolean equals(Object o)
