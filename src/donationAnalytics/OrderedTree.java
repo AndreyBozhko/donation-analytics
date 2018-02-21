@@ -3,13 +3,22 @@ package donationAnalytics;
 
 
 /**
- * Wrapper class for the RedBlackBST class with specified types for keys and values.
- * A key of generic type is inserted as (Key, Integer) tuple.
+ * Wrapper class for the RedBlackBST class.
+ * This class allows multiple insertions of identical keys.
  */
-public class OrderedTree<Key extends Comparable<Key>> 
-                             extends RedBlackBST<Tuple<Key, Integer>, Integer> {
-    // The auxiliary Integer key is used to avoid collisions between equal primary keys.
+public class OrderedTree<Key extends Comparable<Key>> {
+    // The auxiliary Integer key, equal to current tree.size(), is used to avoid collisions between equal primary keys.
     // The value will always be assigned 0, since only the ordering of primary keys is of interest.
+    
+    private final RedBlackBST<Tuple<Key, Integer>, Integer> rbtree;
+    
+    
+    
+    /**
+     * Initializes new instance of OrderedTree.
+     */
+    public OrderedTree()
+    { rbtree = new RedBlackBST<>(); }
     
     
     
@@ -20,7 +29,8 @@ public class OrderedTree<Key extends Comparable<Key>>
      * @param key a Tuple data type
      */
     public void put(Key key)
-    { put(new Tuple<>(key, size()), 0); }
+    { rbtree.put(new Tuple<>(key, size()), 0); }
+    
     
     
     /**
@@ -29,6 +39,15 @@ public class OrderedTree<Key extends Comparable<Key>>
      * @return the kth smallest key
      */
     public Key selectKMin(int k)
-    { return select(k).getKey1(); }
+    { return rbtree.select(k).getKey1(); }
+
+    
+    
+    /**
+     * Returns the size of the tree
+     * @return size of the tree
+     */
+    public int size()
+    { return rbtree.size(); }
     
 }
